@@ -1,5 +1,6 @@
 import mysql.connector
 import re
+from sql_info import *
 
 def remove_unnecessary_tokens(text):
     # Balise HTML
@@ -12,10 +13,10 @@ def remove_unnecessary_tokens(text):
 
 # Connexion de la database aux mysql perso
 connection = mysql.connector.connect(
-    host="localhost",
-    user="root", 
-    password="mdp",  #mdp sql perso
-    database="Databattle"
+    host=localhost,
+    user=root, 
+    password=pwd,  #mdp sql perso
+    database=db
 )
 cursor = connection.cursor()
 
