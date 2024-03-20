@@ -9,7 +9,7 @@ def remove_unnecessary_tokens(text):
     cleaned_text = cleaned_text.replace('\n', '')
     cleaned_text = cleaned_text.strip()
     return cleaned_text
-#r
+
 
 # Connexion de la database aux mysql perso
 connection = mysql.connector.connect(
