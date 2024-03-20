@@ -101,19 +101,19 @@ def clean_tweet(text, flg_stemm=False, flg_lemm=True, lst_stopwords=None):
 try:
     cursor.execute(requete)
     results = cursor.fetchall()
-    row_list = []
+    """row_list = []
     for i in range(len(results)):
         row_list.append(list(results[i]))
         row_list [i][0] = remove_unnecessary_tokens(row_list[i][0])
         row_list [i][0] = clean_tweet(row_list[i][0], flg_stemm=False, flg_lemm=True, lst_stopwords=None)
-    print(row_list)
-    """for row in results:
+    print(row_list)"""
+    for row in results:
         row_list = list(row)
+        row_list[0] = remove_unnecessary_tokens(row_list[0])
+        row_list[0] = clean_tweet(row_list[0], flg_stemm=False, flg_lemm=True, lst_stopwords=None)
         # Fonctionne en considérant que la première requête est un texte 
         # Possibilité de travailler avec des dico pour palier à ça
-        row_list [0] = remove_unnecessary_tokens(row_list[0])
-        clean_tweet(row_list[0], flg_stemm=False, flg_lemm=True, lst_stopwords=None)
-        print(row_list)"""
+        print(row_list[0])
         
 except mysql.connector.Error as error:
     print("Error executing SQL query:", error)
@@ -137,7 +137,7 @@ def extract_keywords(text):
     # Extraction des mots-clés (noms et verbes)
     keywords = [word for word, pos in pos_tags if pos.startswith('N') or pos.startswith('V')]
     return keywords
- 
+""" 
 # Exemple d'utilisation
 text = "atelier"
 keywords = extract_keywords(text)
@@ -155,3 +155,4 @@ for i in range(len(row_list)):
             if keywords[j] == row_list[i][0][k]:
                 renvoyer.append(row_list[i])
                 print(row_list[i],"\n")
+"""

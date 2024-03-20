@@ -100,7 +100,10 @@ import tqdm
 import numpy as np
 
 import tensorflow as tf
-from tensorflow.keras import layers
+from keras import layers
+
+from sql_info import *
+from read_sql import *
 
 # Commented out IPython magic to ensure Python compatibility.
 # Load the TensorBoard notebook extension
@@ -118,7 +121,7 @@ Consider the following sentence:
 Tokenize the sentence:
 """
 
-sentence = "The wide road shimmered in the hot sun"
+sentence = "L'atelier des panneaux solaires"
 tokens = list(sentence.lower().split())
 print(len(tokens))
 
@@ -258,7 +261,7 @@ def generate_training_data(sequences, window_size, num_ns, vocab_size, seed):
   sampling_table = tf.keras.preprocessing.sequence.make_sampling_table(vocab_size)
 
   # Iterate over all sequences (sentences) in the dataset.
-  for sequence in tqdm.tqdm(sequences):
+  for sequence in tqdm(sequences):
 
     # Generate positive skip-gram pairs for a sequence (sentence).
     positive_skip_grams, _ = tf.keras.preprocessing.sequence.skipgrams(
@@ -302,14 +305,24 @@ With an understanding of how to work with one sentence for a skip-gram negative 
 You will use a text file of Shakespeare's writing for this tutorial. Change the following line to run this code on your own data.
 """
 
-path_to_file = tf.keras.utils.get_file('shakespeare.txt', 'https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt')
-
+#path_to_file = np.genfromtxt('log.txt', delimiter='\n')
 """Read the text from the file and print the first few lines:"""
+# Chemin du fichier provenant d'un tableau NumPy
+path_to_file = np.array(['log.txt'])
+ 
+# Convertir le chemin du fichier en une chaîne de caractères
+path_str = path_to_file.item()
+ 
+# Ouvrir le fichier avec la fonction open() dans un bloc with
+with open(path_str) as f:
+    # Faire quelque chose avec le fichierwith open(path_to_file) as f:
+    lines = f.read().splitlines()
+    for line in lines[:20]:
+        print(line)
 
-with open(path_to_file) as f:
-  lines = f.read().splitlines()
-for line in lines[:20]:
-  print(line)
+    pass
+
+
 
 """Use the non empty lines to construct a `tf.data.TextLineDataset` object for the next steps:"""
 
