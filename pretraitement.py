@@ -1,9 +1,18 @@
+#### Librairies ####
+import nltk
+import tensorflow as tf
+
+
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+from collections import Counter 
+from nltk.probability import FreqDist
+
 
 # Charger le texte nettoyé depuis le fichier
 input_file = "solutions_traitees.txt"
-output_file = "tokens.txt"
+inter_file = "tokens.txt"
+output_file = "tokens_nettoyes.txt"
 
 with open(input_file, "r", encoding="utf-8") as f:
     text = f.read()
@@ -18,9 +27,7 @@ stop_words = set(stopwords.words('french'))
 tokens_without_stopwords = [word for word in tokens if word.lower() not in stop_words]
 
 # Écrire les tokens sans mots vides dans le fichier de sortie
-with open(output_file, "w", encoding="utf-8") as f_output:
+with open(inter_file, "w", encoding="utf-8") as f_output:
     for token in tokens_without_stopwords:    
         f_output.write(token + "\n")
-
-# Afficher les tokens sans mots vides
-print("Tokens sans mots vides dans :", output_file)
+print("Tokens sans mots vides dans :", inter_file)
