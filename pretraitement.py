@@ -88,39 +88,39 @@ print("Tokens sans mots vides dans :", output_file)
 
 
 
-    ######### MODELE WORD2VEC ET TEST ##########
+######### MODELE WORD2VEC ET TEST ##########
 
 
-    #########                         #########
+#########                         #########
 
-    # Entraînement du modèle Word2Vec
-    model = Word2Vec(sentences=[tokens_sans_stopwords], vector_size=100, window=5, min_count=1, workers=4, epochs=10)
-    weights = model.wv.vectors
-    vocab = model.wv.index_to_key
-
-
-    # Mots similaires
-    mots_similaires = model.wv.most_similar('variateur')
-    print("\nMots similaires à 'variateur':", mots_similaires)
-
-    out_v = io.open('vectors.tsv', 'w', encoding='utf-8')
-    out_m = io.open('metadata.tsv', 'w', encoding='utf-8')
+# Entraînement du modèle Word2Vec
+model = Word2Vec(sentences=[tokens_sans_stopwords], vector_size=100, window=5, min_count=1, workers=4, epochs=10)
+weights = model.wv.vectors
+vocab = model.wv.index_to_key
 
 
-    for index, word in enumerate(vocab):
-    if index == 0:
-        continue  # skip 0, it's padding.
-    vec = weights[index]
-    out_v.write('\t'.join([str(x) for x in vec]) + "\n")
-    out_m.write(word + "\n")
-    out_v.close()
-    out_m.close()
+# Mots similaires
+mots_similaires = model.wv.most_similar('variateur')
+print("\nMots similaires à 'variateur':", mots_similaires)
 
-    """Download the `vectors.tsv` and `metadata.tsv` to analyze the obtained embeddings in the [Embedding Projector](https://projector.tensorflow.org/):"""
+out_v = io.open('vectors.tsv', 'w', encoding='utf-8')
+out_m = io.open('metadata.tsv', 'w', encoding='utf-8')
 
-    try:
-    from google.colab import files
-    files.download('vectors.tsv')
-    files.download('metadata.tsv')
-    except Exception:
-    pass
+
+for index, word in enumerate(vocab):
+  if index == 0:
+    continue  # skip 0, it's padding.
+  vec = weights[index]
+  out_v.write('\t'.join([str(x) for x in vec]) + "\n")
+  out_m.write(word + "\n")
+out_v.close()
+out_m.close()
+
+"""Download the `vectors.tsv` and `metadata.tsv` to analyze the obtained embeddings in the [Embedding Projector](https://projector.tensorflow.org/):"""
+
+try:
+  from google.colab import files
+  files.download('vectors.tsv')
+  files.download('metadata.tsv')
+except Exception:
+  pass
