@@ -85,9 +85,16 @@ with open(output_file, "w", encoding="utf-8") as f_output:
         f_output.write(token + "\n")
 print("Tokens sans mots vides dans :", output_file)
 
+
+
+######### MODELE WORD2VEC ET TEST ##########
+
+
+#########                         #########
+
 # Entraînement du modèle Word2Vec
 model = Word2Vec(sentences=[tokens_sans_stopwords], vector_size=100, window=5, min_count=1, workers=4, epochs=10)
 
-# Trouver les mots les plus similaires à un mot donné   
+# Mots similaires
 mots_similaires = model.wv.most_similar('variateur')
 print("\nMots similaires à 'variateur':", mots_similaires)
