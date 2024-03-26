@@ -6,3 +6,7 @@ data_code_appel_objet.zip
 extract solution.py
 solutions.txt
 typedictionnaire.txt
+tokens_lemmatises.txt
+tokens.txt
+vectors.tsv
+metadata.tsv

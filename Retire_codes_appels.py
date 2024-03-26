@@ -1,6 +1,8 @@
 import mysql.connector
 import re
 import html
+from sql_info import *
+
 
 def remove_unnecessary_tokens(text):
     # Balise HTML
@@ -14,10 +16,6 @@ def remove_unnecessary_tokens(text):
     return cleaned_text
 
 
-localhost= "localhost"
-root= "root"
-pwd= "oongaek7aigu"  
-db= "bdd"
 
 # Connexion de la base de données MySQL
 connection = mysql.connector.connect(
