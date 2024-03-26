@@ -39,23 +39,27 @@ canvas = Canvas(
 def affichage_reponse(event=None):
     question = entry_1.get("1.0", "end-1c")
     print("ff")
-     # Supprimer le texte existant sur le canevas s'il existe
-    top_texts = find_top_texts(question, model, dict_embeddings, dict_sol_copy)
-    texte = str()  # Initialiser la variable texte en tant que chaîne de caractères vide
-    for num_texte, similarity in top_texts:
-        texte += " " + str(num_texte)+","
-    texte = texte[:-1] + '.'
+    # Supprimer le texte existant sur le canevas s'il existe
+    texts_and_similarities = find_top_texts(question, model, dict_embeddings, dict_sol_copy)
+    texte = ""  # Initialiser la variable texte en tant que chaîne de caractères vide
+    for num_texte, similarity, text in texts_and_similarities:
+        print("Numéro de texte:", num_texte)
+        print("Similarité:", similarity)
+        print("Texte associé:", text)
+        print()  # Ajouter une ligne vide entre chaque texte et solution
+        texte += "\n " + str(num_texte) +  ": " + str(text)  # Ajouter le numéro de texte à la chaîne
     canvas.delete("reponse_texte")
     canvas.create_text(
         137.0,
         276.0,
         anchor="nw",
-        text="Les codes correspondants sont : "+texte,
+        text="Les codes correspondants sont : " + texte,
         fill="#FFFFFF",
-        font=("Judson Regular", 24 * -1),
+        font=("Judson Regular", 12 * -1),
         tags="reponse_texte",
-        width=395
+        width=500
     )
+
     
 canvas.place(x = 0, y = 0)
 image_image_1 = PhotoImage(

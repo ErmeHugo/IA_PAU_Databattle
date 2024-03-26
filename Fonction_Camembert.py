@@ -44,7 +44,7 @@ def chunk_text(text, chunk_size=500000):
         start += chunk_size
         return chunks
 
-def find_top_texts(question, model, dict_embeddings, dict_sol, top_n=15):
+def find_top_texts(question, model, dict_embeddings, dict_sol, top_n=5):
     # Calculer les embeddings pour la question
     question_embedding = model.encode(question)
 
@@ -54,13 +54,15 @@ def find_top_texts(question, model, dict_embeddings, dict_sol, top_n=15):
     # Affichage des numéros des textes les plus pertinents
     sorted_texts = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
     top_texts = sorted_texts[:top_n] 
-    return(top_texts)
-"""
-    print("Textes les plus pertinents pour la question:", question)
+
+    # Récupérer les textes correspondant aux numéros de texte
+    texts_and_similarities = []
     for num_texte, similarity in top_texts:
-        print("Numéro de texte:", num_texte, "- Similarité:", similarity)
-        print("Texte associé:", dict_sol[num_texte])
-        print()"""
+        texte = dict_sol[num_texte]  # Récupérer le texte associé au numéro de texte
+        texts_and_similarities.append((num_texte, similarity, texte))  # Ajouter le texte et la similarité à la liste
+
+    return texts_and_similarities
+
 
 # Calculer et sauvegarder les embeddings en amont
 def calculate_and_save_embeddings(model, dict_sol):
