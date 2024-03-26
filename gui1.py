@@ -57,7 +57,7 @@ def affichage_reponse(event=None):
         fill="#FFFFFF",
         font=("Judson Regular", 12 * -1),
         tags="reponse_texte",
-        width=500
+        width=400
     )
 
     
