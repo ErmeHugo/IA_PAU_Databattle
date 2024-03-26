@@ -94,7 +94,7 @@ button_1.place(
 
 
 canvas.create_text(
-    229.0,
+    209.0,
     32.0,
     anchor="nw",
     text="Donnez votre nombre\n",
