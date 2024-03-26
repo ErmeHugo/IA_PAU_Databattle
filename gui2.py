@@ -8,6 +8,7 @@ from pathlib import Path
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from ecolo import *
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -38,13 +39,22 @@ canvas = Canvas(
 def affichage_reponse(event=None):
     texte = entry_1.get("1.0", "end-1c")
     print("ff")
+    lis=[]
+    print(int(texte))
+    lis.append(int(texte))
      # Supprimer le texte existant sur le canevas s'il existe
     canvas.delete("reponse_texte")
+    tempo=final_eco(f4(f3(lis)))
+    tempo[0][0]=round(tempo[0][0], 2)
+    tempo[0][1]=round(tempo[0][1], 2)
+    tempo[0][2]=round(tempo[0][2], 2)
+    print("teste",str(tempo[0][2]))
+
     canvas.create_text(
         137.0,
         276.0,
         anchor="nw",
-        text="Le Gain financier est : "+texte+"€\n"+"L'économie d'énergie : "+texte+"MW\n"+"Les émissions GES évitées : "+texte+"t",
+        text="Le Gain financier est : "+str(tempo[0][0])+"€\n"+"L'économie d'énergie : "+str(tempo[0][1])+"KWh\n"+"Les émissions GES évitées : "+str(tempo[0][2])+" t de CO2",
         fill="#FFFFFF",
         font=("Judson Regular", 15 * -1),
         tags="reponse_texte",

@@ -122,14 +122,15 @@ def moy_argent_C02_energie(L):
     M.append(L[4])
     M.append(L[7])
     return(M)
-    
-M = []
-for i in range(len(codeEtudesBilans)):
-    MM = []
-    for j in range(len(codeEtudesBilans[i])):
-        MM.append(moy_argent_C02_energie(codeEtudesBilans[i][j]))
-    M.append(MM)
-print(M)
+
+def f4(codeEtudesBilans):  
+    M = []
+    for i in range(len(codeEtudesBilans)):
+        MM = []
+        for j in range(len(codeEtudesBilans[i])):
+            MM.append(moy_argent_C02_energie(codeEtudesBilans[i][j]))
+        M.append(MM)
+    return(M)
 
 
 
@@ -190,7 +191,7 @@ def final_eco(A):
         Final.append(FinalI)
     return(Final)
 
-print("Voici les bilans finaux : ",final_eco(M))
+#print("Voici les bilans finaux : ",final_eco(f4(f3(codeSolutionsTrouvees))))
 
     
 

@@ -31,34 +31,44 @@ conditions = f"codelangue = 2 "#AND codeappelobjet = 719"
 
 requete = f"SELECT {colonnes} FROM {table} WHERE {conditions}"
 
-codeSolutionsTrouvees = [483,105,780] #780 est un bon exemple aussi
+codeSolutionsTrouvees = [780] #780 est un bon exemple aussi
 codeEtudesDeCasAffilies = []
 codeEtudesDeCasI = []
-try:
-    with connection.cursor() as cursor:
-        for i in range(len(codeSolutionsTrouvees)):
-            # Requête SQL pour récupérer les colonnes avec codedsolution dans la liste codeSolutionsTrouvees
-            sql = "SELECT DISTINCT coderex FROM tblgainrex WHERE codesolution = %s" 
 
-            # Exécution de la requête SQL avec le paramètre a
-            cursor.execute(sql, (codeSolutionsTrouvees[i],))
-        
-            # Récupération des résultats
-            result = cursor.fetchall()
-            #print(result)
+def f1(codeSolutionsTrouvees):
+    connection = mysql.connector.connect(
+    host=localhost,
+    user=root, 
+    password=pwd,  #mdp sql perso
+    database=db
+)
+    cursor = connection.cursor()
+    codeEtudesDeCasI = []
+    try:
+        with connection.cursor() as cursor:
+            for i in range(len(codeSolutionsTrouvees)):
+                # Requête SQL pour récupérer les colonnes avec codedsolution dans la liste codeSolutionsTrouvees
+                sql = "SELECT DISTINCT coderex FROM tblgainrex WHERE codesolution = %s" 
 
-            for j in result:
-                # Ajout des résultats à la liste
-                codeEtudesDeCasI.append(j[0])
-            codeEtudesDeCasI.sort()
-            codeEtudesDeCasAffilies.append(codeEtudesDeCasI)
-            codeEtudesDeCasI = []
+                # Exécution de la requête SQL avec le paramètre a
+                cursor.execute(sql, (codeSolutionsTrouvees[i],))
+            
+                # Récupération des résultats
+                result = cursor.fetchall()
+                #print(result)
 
-finally:
-    # Fermeture de la connexion à la base de données
-    connection.close()
+                for j in result:
+                    # Ajout des résultats à la liste
+                    codeEtudesDeCasI.append(j[0])
+                codeEtudesDeCasI.sort()
+                codeEtudesDeCasAffilies.append(codeEtudesDeCasI)
+                codeEtudesDeCasI = []
 
-print(codeEtudesDeCasAffilies)
+    finally:
+        # Fermeture de la connexion à la base de données
+        connection.close()
+
+    return(codeEtudesDeCasAffilies)
 
 
 # Connexion de la database aux mysql perso
@@ -134,34 +144,44 @@ cursor = connection.cursor()
 
 
 codeEtudesBilans = []
-
-try:
-    with connection.cursor() as cursor:
-        for i in range(len(codeEtudesDeCasAffilies)):
-            codeEtudesBilansI = []  # Initialisation de la liste interne
+def f2(codeEtudesDeCasAffilies):
+    connection = mysql.connector.connect(
+    host=localhost,
+    user=root, 
+    password=pwd,  #mdp sql perso
+    database=db
+    )
+    cursor = connection.cursor()
+    try:
+        with connection.cursor() as cursor:
+            for i in range(len(codeEtudesDeCasAffilies)):
+                codeEtudesBilansI = []  # Initialisation de la liste interne
+                
+                for j in range(len(codeEtudesDeCasAffilies[i])):
+                    # Requête SQL pour récupérer les colonnes avec typedictionnaire = 'sol'
+                    sql = "SELECT numrex, gainfinancierrex, codemonnaie, gainfinancierperioderex, energierex, codeuniteenergie, codeperiodeenergie, gesrex FROM tblrex WHERE numrex = %s" #tblrex ligne 1382
             
-            for j in range(len(codeEtudesDeCasAffilies[i])):
-                # Requête SQL pour récupérer les colonnes avec typedictionnaire = 'sol'
-                sql = "SELECT numrex, gainfinancierrex, codemonnaie, gainfinancierperioderex, energierex, codeuniteenergie, codeperiodeenergie, gesrex FROM tblrex WHERE numrex = %s" #tblrex ligne 1382
-        
-                # Exécution de la requête SQL
-                cursor.execute(sql, (codeEtudesDeCasAffilies[i][j],))
-        
-                # Récupération des résultats
-                result = cursor.fetchall()
-
-                for k in result:
-                    k = list(k)
-                    # Ajout des résultats à la liste
-                    codeEtudesBilansI.append(k)
+                    # Exécution de la requête SQL
+                    cursor.execute(sql, (codeEtudesDeCasAffilies[i][j],))
             
-            # Ajout de la liste interne à la liste externe
-            codeEtudesBilans.append(codeEtudesBilansI)
-finally:
-    # Fermeture de la connexion à la base de données
-    connection.close()
+                    # Récupération des résultats
+                    result = cursor.fetchall()
 
-print(codeEtudesBilans)
+                    for k in result:
+                        k = list(k)
+                        # Ajout des résultats à la liste
+                        codeEtudesBilansI.append(k)
+                
+                # Ajout de la liste interne à la liste externe
+                codeEtudesBilans.append(codeEtudesBilansI)
+    finally:
+        # Fermeture de la connexion à la base de données
+        connection.close()
+
+    return(codeEtudesBilans)
+
+def f3(codeSolutionsTrouvees):
+    return f2(f1(codeSolutionsTrouvees))
 
 
 
