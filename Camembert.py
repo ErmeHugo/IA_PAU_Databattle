@@ -1,3 +1,4 @@
+########### Import librairies ###########
 import tensorflow as tf
 import numpy as np
 import mysql.connector
@@ -10,7 +11,7 @@ from sql_info import *
 from Fonction_Camembert import *
 
 
-########### LIAISON BDD PYTHON ##############
+########### LIAISON BDD PYTHON ###########
 
 
 # Connexion de la database aux mysql perso
@@ -52,7 +53,7 @@ finally:
     connection.close()
 
 
-########### PRÉTRAITEMENT BDD ##############
+########### PRÉTRAITEMENT BDD ###########
 
 
 dict_sol_copy = copy.deepcopy(dict_sol)
@@ -66,7 +67,7 @@ for key,text in dict_sol.items():
 
 
 
-########### MODEL  ##############
+########### MODELE ###########
 
 model =  SentenceTransformer("dangvantuan/sentence-camembert-large")
 
