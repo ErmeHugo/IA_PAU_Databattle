@@ -21,6 +21,8 @@ nlp = fr_core_news_md.load()  #A installer before
 def custom_lemmatize(text):
     doc = nlp(text)
     lemmas = [token.lemma_ for token in doc]
+    # stop_words = set(nlp.Defaults.stop_words)
+    # tokens_sans_stopwords = [word for word in lemmas if word.lower() not in stop_words]
     return lemmas
 
 

@@ -1,9 +1,11 @@
 import tensorflow as tf
-from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import mysql.connector
 import re
+import copy
+
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
 from sql_info import *
 from Fonction_Camembert import *
 
@@ -53,6 +55,7 @@ finally:
 ########### PRÉTRAITEMENT BDD ##############
 
 
+dict_sol_copy = copy.deepcopy(dict_sol)
 
 for key,text in dict_sol.items():
     #text = remove_punctuation(text)
@@ -73,14 +76,14 @@ dict_embeddings = joblib.load('embeddings.pkl')
 
 # Utilisation de la fonction pour trouver les textes les plus pertinents pour une question spécifique
 question = "C'est quoi la HP flottante ?"
-find_top_texts(question, model, dict_embeddings, dict_sol)
+find_top_texts(question, model, dict_embeddings, dict_sol_copy)
 
 question_2 = "Je voudrais dimensionner un panneau solaire."
-find_top_texts(question_2, model, dict_embeddings, dict_sol)
+find_top_texts(question_2, model, dict_embeddings, dict_sol_copy)
 
 question_3 = "Quel gain pour un variateur de vitesse ?"
-find_top_texts(question_3, model, dict_embeddings, dict_sol)
+find_top_texts(question_3, model, dict_embeddings, dict_sol_copy)
 
 question_4 = "Quelles sont les meilleures solutions pour l'agro-alimentaire ? "
-find_top_texts(question_4, model, dict_embeddings, dict_sol)
+find_top_texts(question_4, model, dict_embeddings, dict_sol_copy)
 
