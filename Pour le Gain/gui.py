@@ -46,7 +46,7 @@ def affichage_reponse(event=None):
         anchor="nw",
         text="Le Gain financier est : "+texte+"€\n"+"L'économie d'énergie : "+texte+"MW\n"+"Les émissions GES évitées : "+texte+"t",
         fill="#FFFFFF",
-        font=("Judson Regular", 20 * -1),
+        font=("Judson Regular", 15 * -1),
         tags="reponse_texte",
         width=395
     )
