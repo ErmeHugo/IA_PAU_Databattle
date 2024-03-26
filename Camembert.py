@@ -75,6 +75,7 @@ model =  SentenceTransformer("dangvantuan/sentence-camembert-large")
 # calculate_and_save_embeddings(model, dict_sol)
 dict_embeddings = joblib.load('embeddings.pkl')
 
+"""
 # Utilisation de la fonction pour trouver les textes les plus pertinents pour une question spécifique
 question = "C'est quoi la HP flottante ?"
 find_top_texts(question, model, dict_embeddings, dict_sol_copy)
@@ -86,5 +87,5 @@ question_3 = "Quel gain pour un variateur de vitesse ?"
 find_top_texts(question_3, model, dict_embeddings, dict_sol_copy)
 
 question_4 = "Quelles sont les meilleures solutions pour l'agro-alimentaire ? "
-find_top_texts(question_4, model, dict_embeddings, dict_sol_copy)
+find_top_texts(question_4, model, dict_embeddings, dict_sol_copy)"""
 
