@@ -98,13 +98,20 @@ model = Word2Vec(sentences=[tokens_sans_stopwords], vector_size=100, window=5, m
 weights = model.wv.vectors
 vocab = model.wv.index_to_key
 
-
 # Mots similaires
 mots_similaires = model.wv.most_similar('variateur')
 print("\nMots similaires à 'variateur':", mots_similaires)
 
 out_v = io.open('vectors.tsv', 'w', encoding='utf-8')
-out_m = io.open('metadata.tsv', 'w', encoding='utf-8')
+
+# Écrire les mots uniques dans le fichier de métadonnées avec l'encodage UTF-16
+with open('metadata.tsv', 'w', encoding='utf-16') as out_m:
+    for index, word in enumerate(vocab):
+        if index == 0:
+            continue  # skip 0, it's padding.
+        vec = weights[index]
+        out_v.write('\t'.join([str(x) for x in vec]) + "\n")
+        out_m.write(word + "\n")
 
 
 for index, word in enumerate(vocab):
