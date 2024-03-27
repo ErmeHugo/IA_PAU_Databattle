@@ -49,9 +49,12 @@ def affichage_reponse(event=None):
      # Supprimer le texte existant sur le canevas s'il existe
     canvas.delete("reponse_texte")
     tempo=final_eco(f4(f3(lis)))
-    tempo[0][0]=round(tempo[0][0], 2)
-    tempo[0][1]=round(tempo[0][1], 2)
-    tempo[0][2]=round(tempo[0][2], 2)
+    if (tempo[0][0] != None) :
+        tempo[0][0]=round(tempo[0][0], 2)
+    if (tempo[0][1] != None) :
+        tempo[0][1]=round(tempo[0][1], 2)
+    if (tempo[0][2] != None) :
+        tempo[0][2]=round(tempo[0][2], 2)
     print("teste",str(tempo[0][2]))
 
     canvas.create_text(

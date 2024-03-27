@@ -12,7 +12,6 @@ co2
 mise
 en
 place
-dune
 installation
 frigorifique
 négatif
