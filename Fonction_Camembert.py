@@ -60,8 +60,8 @@ def find_top_texts(question, model, dict_embeddings, dict_sol, top_n=5):
     for num_texte, similarity in top_texts:
         texte = dict_sol[num_texte]  # Récupérer le texte associé au numéro de texte
         texts_and_similarities.append((num_texte, similarity, texte))  # Ajouter le texte et la similarité à la liste
-
-    return texts_and_similarities
+    print(question)
+    return print(texts_and_similarities)
 
 
 # Calculer et sauvegarder les embeddings en amont
