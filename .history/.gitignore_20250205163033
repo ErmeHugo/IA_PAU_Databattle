@@ -13,4 +13,4 @@ tokens.txt
 vectors.tsv
 metadata.tsv
 embeddings.pkl
-docker-compose.yml
+
