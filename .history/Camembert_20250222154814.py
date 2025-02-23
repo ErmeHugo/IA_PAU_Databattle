@@ -4,7 +4,7 @@ import numpy as np
 import mysql.connector
 import re
 import copy
-import os 
+
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from sql_info import *
@@ -13,30 +13,14 @@ from Fonction_Camembert import *
 
 ########### LIAISON BDD PYTHON ###########
 
-# Retrieve connection details from environment variables
-host = os.getenv("MYSQL_HOST", "localhost")
-user = os.getenv("MYSQL_USER", "root")
-password = os.getenv("MYSQL_PASSWORD", "mdp")
-database = os.getenv("MYSQL_DB", "Databattle")
 
-# Wait until MySQL is ready
-for _ in range(10):
-    try:
-        connection = mysql.connector.connect(
-            host=host,
-            user=user,
-            password=password,
-            database=database
-        )
-        if connection.is_connected():
-            print("Connected to MySQL successfully!")
-            break
-    except Error as e:
-        print(f"Waiting for database... Error: {e}")
-        time.sleep(5)
-else:
-    print("Failed to connect to database after multiple attempts.")
-
+# Connexion de la database aux mysql perso
+connection = mysql.connector.connect(
+    host=localhost,
+    user=root, 
+    password=pwd,  
+    database=db
+)
 cursor = connection.cursor()
 
 table = "tbldictionnaire"

@@ -1,0 +1,12 @@
+spacy==3.5.0
+joblib==1.2.0
+scikit-learn==1.2.0
+nltk==3.8.1
+gensim==4.2.0
+tensorflow==2.15.0
+numpy>=1.23.5,<2.0.0
+mysql-connector-python>=8.0.32  
+sentence-transformers==2.1.0
+
+
+

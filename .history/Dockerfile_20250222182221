@@ -1,4 +1,4 @@
-FROM python:3.8.10-slim
+FROM python:3.8.10
 
 # Set the working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . /app
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-RUN python -m spacy download fr_core_news_md
+RUN python -m spacy download fr-core-news-md
 
 # Expose the appropriate port (change as per your app's requirement)
 EXPOSE 5000

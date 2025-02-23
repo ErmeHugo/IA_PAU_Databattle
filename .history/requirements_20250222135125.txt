@@ -1,0 +1,10 @@
+spacy
+fr-core-news-md
+joblib
+scikit-learn
+nltk
+gensim
+tensorflow
+numpy
+mysql-connector-python
+sentence-transformers

@@ -17,7 +17,7 @@ COPY . /app
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-RUN python -m spacy download fr_core_news_md
+RUN python3 -m spacy download fr_core_news_md
 
 # Expose the appropriate port (change as per your app's requirement)
 EXPOSE 5000
